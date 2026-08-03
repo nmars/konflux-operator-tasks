@@ -166,6 +166,7 @@ spec:
             exit 0
           fi
 
+          unreleased_bundles='registry.redhat.io/migration-toolkit-virtualization/mtv-operator-bundle@sha256:19ceba8eb0c00e6f083392829c111b27a3a20089629df28cd97d28fe51452207'
           if [ -z "${unreleased_bundles}" ]; then
             echo "No unreleased bundles found. Skipping check."
             exit 0
@@ -281,6 +282,11 @@ spec:
 
           done
         done < <(echo "$image_manifests" | jq -r 'to_entries[] | "\(.key) \(.value)"')
+
+        # unique_related_images+=('registry.redhat.io/migration-toolkit-virtualization/mtv-rhv-populator-rhel8@sha256:fac58cdde028a06bcb3bbf1507246e4de1afabf7586b7bd202cdd3493c6a958b')
+        # unique_related_images+=('registry.redhat.io/migration-toolkit-virtualization/mtv-validation-rhel9@sha256:03fe4e6d99b70cc92d2add95226a331dad5cc0b8cf5c33badf0bcb5d3459594b')
+        # unique_related_images+=('registry.redhat.io/migration-toolkit-virtualization/mtv-virt-v2v-rhel9@sha256:fb368200eb1f818a279338af110b062beb3779a8c8bf1cfa11f2f3accfad7b24')
+
 
         if [ ${#unique_related_images[@]} -gt 0 ]; then
           echo "Unique related images: ${unique_related_images[*]}"
